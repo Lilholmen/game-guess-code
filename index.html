@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Guess Code</title>
+  </head>
+  <body>
+    <h1>Guess the code</h1>
+    <section class="code-iput">
+      <input
+        class="code-input__number"
+        id="1"
+        type="number"
+        min="0"
+        max="9"
+        step="1"
+      />
+      <input
+        class="code-input__number"
+        id="2"
+        type="number"
+        min="0"
+        max="9"
+        step="1"
+      />
+      <input
+        class="code-input__number"
+        id="3"
+        type="number"
+        min="0"
+        max="9"
+        step="1"
+      />
+    </section>
+    <button class="guess" id="guess">Guess</button>
+    <section class="history">
+      <div class="history__check"></div>
+      <div class="history__tips"></div>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
