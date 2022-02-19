@@ -6,6 +6,7 @@ const tips = document.querySelector('.history__tips');
 start();
 
 function start() {
+  createCounter();
   const code = generateCode(3);
   let startNum = generateStart(3);
 
@@ -96,4 +97,20 @@ function giveTip(code, attempt) {
   let answer = `${matches.correct} numbers are correct, ${matches.wrongPlace} not on the right place`;
   //console.log(code)
   tips.textContent = attempt + ': ' + answer;
+}
+
+function createCounter() {
+  let value = randomNumber(0, 9);
+
+  const container = document.createElement('div');
+  const increase = document.createElement('button');
+  const decrease = document.createElement('button');
+  const number = document.createElement('div');
+
+  increase.textContent = '+';
+  decrease.textContent = '-';
+
+  container.append(increase, number, decrease);
+
+  console.log(container);
 }

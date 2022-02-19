@@ -1,0 +1,35 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+.wrapper {
+  background-color: rgb(34, 34, 34);
+}
+
+.game {
+  min-height: 100vh;
+  max-height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 1fr 100px 1fr;
+  width: 700px;
+}
+
+.game__name {
+  font-size: 72px;
+  color: rgb(187, 26, 26);
+}
+
+.guess {
+  background-color: rgb(252, 252, 16);
+  border: 3px solid rgb(59, 59, 59);
+  border-radius: 16px;
+  font-size: 48px;
+  color: rgb(27, 27, 27);
+  height: 66px;
+  width: 250px;
+}
