@@ -1,37 +1,33 @@
-const codeInputs = document.querySelectorAll('.code-input__number');
 const guessButton = document.querySelector('.guess');
-const checkText = document.querySelector('.history__check');
-const tips = document.querySelector('.history__tips');
+const tipsSection = document.querySelector('.history__tips');
 
-start();
+let diff = 3;
 
-function start() {
-  createCounter();
-  const code = generateCode(3);
-  let startNum = generateStart(3);
+start(diff);
+
+function start(difficult) {
+  const codeInputs = createCounters(difficult);
+
+  const code = generateCode(difficult);
 
   console.log(code);
-
-  codeInputs.forEach((input, index) => (input.value = startNum[index]));
 
   guessFunction = function () {
     let guessTry = [];
 
-    codeInputs.forEach((input) => guessTry.push(input.value));
+    codeInputs.forEach((input) => guessTry.push(input.textContent));
 
     guessTry = guessTry.join('');
 
     if (guessTry === code) {
-      checkText.textContent = 'success';
+      //tipsSection.textContent = 'success';
     } else {
-      checkText.textContent = 'fail';
-      giveTip(code, guessTry);
+      //tipsSection.textContent = 'fail';
+      createTip(code, guessTry, checkAttempt);
     }
   };
 
   guessButton.addEventListener('click', guessFunction);
-
-  //console.log(code);
 }
 
 function randomNumber(min, max) {
@@ -52,26 +48,56 @@ function generateCode(codeLength) {
   return code;
 }
 
-function generateStart(codeLength) {
-  let startNum = randomNumber(0, '9'.repeat(codeLength));
-
-  startNum = String(startNum);
-  const len = startNum.length;
-
-  if (len < codeLength) {
-    startNum = '0'.repeat(codeLength - len) + startNum;
-  }
-
-  return startNum.split('');
-}
-
-function testGen(count) {
+/* function testGen(count) {
   for (let i = 0; i < count; i++) {
-    console.log(generateCode(3));
+    console.log(generateCode(diff));
   }
+} */
+
+function createCounters(numberCount) {
+  const container = document.querySelector('.code-input');
+
+  for (let i = 1; i <= numberCount; i++) {
+    const number = document.createElement('div');
+    const incBtn = document.createElement('button');
+    const decBtn = document.createElement('button');
+    const value = document.createElement('span');
+
+    number.classList.add('code-input__number');
+    number.id = i;
+
+    incBtn.classList.add(
+      'number__button',
+      'number__button--increase',
+      'increase'
+    );
+    incBtn.addEventListener('click', () => {
+      if (value.textContent < 9) {
+        value.textContent++;
+      } else value.textContent = 0;
+    });
+    decBtn.classList.add(
+      'number__button',
+      'number__button--decrease',
+      'decrease'
+    );
+    decBtn.addEventListener('click', () => {
+      if (value.textContent > 0) {
+        value.textContent--;
+      } else value.textContent = 9;
+    });
+
+    value.classList.add('number__value', 'value');
+    value.textContent = randomNumber(0, 9);
+
+    number.append(incBtn, value, decBtn);
+    container.append(number);
+  }
+
+  return document.querySelectorAll('.number__value');
 }
 
-function giveTip(code, attempt) {
+function checkAttempt(code, attempt) {
   let matches = {
     correct: 0,
     rightPlace: 0,
@@ -94,23 +120,23 @@ function giveTip(code, attempt) {
 
   matches.wrongPlace = matches.correct - matches.rightPlace;
 
-  let answer = `${matches.correct} numbers are correct, ${matches.wrongPlace} not on the right place`;
-  //console.log(code)
-  tips.textContent = attempt + ': ' + answer;
+  return `${matches.correct} numbers are correct, ${matches.wrongPlace} not on the right place`;
 }
 
-function createCounter() {
-  let value = randomNumber(0, 9);
+function createTip(code, attemptCode, checkFunction) {
+  const tip = document.createElement('div');
+  const codeHeader = document.createElement('h3');
+  const tipText = document.createElement('div');
 
-  const container = document.createElement('div');
-  const increase = document.createElement('button');
-  const decrease = document.createElement('button');
-  const number = document.createElement('div');
+  tip.classList.add('tip');
+  codeHeader.classList.add('tip__header');
+  tipText.classList.add('tip__text');
 
-  increase.textContent = '+';
-  decrease.textContent = '-';
+  let answer = checkFunction(code, attemptCode);
 
-  container.append(increase, number, decrease);
+  codeHeader.textContent = attemptCode;
+  tipText.textContent = answer;
 
-  console.log(container);
+  tip.append(codeHeader, tipText);
+  tipsSection.append(tip);
 }

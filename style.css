@@ -24,6 +24,39 @@
   color: rgb(187, 26, 26);
 }
 
+.code-input {
+  display: flex;
+}
+
+.code-input__number {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  margin-left: 50px;
+}
+
+.number__button {
+  height: 46px;
+  width: 72px;
+}
+
+.number__button--increase {
+  background-image: url('inc.png');
+  background-color: rgba(0, 0, 0, 0);
+  background-size: 100%;
+}
+
+.number__button--decrease {
+  background-image: url('dec.png');
+  background-color: rgba(0, 0, 0, 0);
+  background-size: 100%;
+}
+
+.number__value {
+  font-size: 96px;
+  color: #ffffff;
+}
+
 .guess {
   background-color: rgb(252, 252, 16);
   border: 3px solid rgb(59, 59, 59);
@@ -32,4 +65,31 @@
   color: rgb(27, 27, 27);
   height: 66px;
   width: 250px;
+}
+
+.history__tips {
+  display: flex;
+}
+
+.tip {
+  display: flex;
+  flex-direction: column;
+  background-image: url('note.png');
+  background-size: 180px;
+  height: 180px;
+  width: 180px;
+}
+
+.tip__header {
+  font-size: 28px;
+  color: #1f1f1f;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.tip__text {
+  color: #1f1f1f;
+  width: 150px;
+  margin-top: 5px;
+  margin-left: 10px;
 }
