@@ -8,15 +8,27 @@
 }
 .wrapper {
   background-color: rgb(34, 34, 34);
+  font-family: 'Roboto', sans-serif;
+}
+
+.settings {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background-color: #ffcc00;
+}
+
+.settings__button {
 }
 
 .game {
   min-height: 100vh;
   max-height: 100%;
   display: grid;
+  place-items: center;
   grid-template-columns: 1fr;
   grid-template-rows: 100px 1fr 100px 1fr;
-  width: 700px;
+  width: 100%;
 }
 
 .game__name {
@@ -26,13 +38,14 @@
 
 .code-input {
   display: flex;
+  justify-content: space-between;
+  width: 300px;
 }
 
 .code-input__number {
   display: flex;
   flex-direction: column;
   place-items: center;
-  margin-left: 50px;
 }
 
 .number__button {
@@ -67,8 +80,10 @@
   width: 250px;
 }
 
-.history__tips {
+.tips {
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .tip {

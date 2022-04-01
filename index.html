@@ -4,21 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Guess Code</title>
   </head>
   <body>
     <main class="wrapper">
-      <div class="game">
+      <section class="settings">
+        <button class="settings__button">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </section>
+
+      <section class="game">
         <h1 class="game__name">Guess the code</h1>
         <section class="code-input"></section>
 
         <button class="guess" id="guess">Guess</button>
 
-        <section class="history">
-          <div class="history__tips"></div>
-        </section>
-      </div>
+        <section class="tips"></section>
+      </section>
     </main>
 
     <script src="app.js"></script>

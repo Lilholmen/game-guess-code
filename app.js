@@ -1,5 +1,5 @@
 const guessButton = document.querySelector('.guess');
-const tipsSection = document.querySelector('.history__tips');
+const tipsSection = document.querySelector('.tips');
 
 let diff = 3;
 
@@ -20,9 +20,8 @@ function start(difficult) {
     guessTry = guessTry.join('');
 
     if (guessTry === code) {
-      //tipsSection.textContent = 'success';
+      guessButton.textContent = 'Success';
     } else {
-      //tipsSection.textContent = 'fail';
       createTip(code, guessTry, checkAttempt);
     }
   };
@@ -35,24 +34,25 @@ function randomNumber(min, max) {
   return num;
 }
 
-function generateCode(codeLength) {
-  let code = randomNumber(0, '9'.repeat(codeLength));
+function randomUniqueNumber(dataArray) {
+  let pos = randomNumber(0, dataArray.length - 1);
 
-  code = String(code);
-  const len = code.length;
-
-  if (len < codeLength) {
-    code = '0'.repeat(codeLength - len) + code;
-  }
-
-  return code;
+  return [pos, dataArray[pos]];
 }
 
-/* function testGen(count) {
-  for (let i = 0; i < count; i++) {
-    console.log(generateCode(diff));
+function generateCode(codeLength) {
+  let code = [];
+  let availableNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  for (let i = 0; i < codeLength; i++) {
+    let newUniqueNumber = randomUniqueNumber(availableNumbers);
+
+    code.push(newUniqueNumber[1]);
+    availableNumbers.splice(newUniqueNumber[0], 1);
   }
-} */
+
+  return code.join('');
+}
 
 function createCounters(numberCount) {
   const container = document.querySelector('.code-input');
@@ -120,7 +120,7 @@ function checkAttempt(code, attempt) {
 
   matches.wrongPlace = matches.correct - matches.rightPlace;
 
-  return `${matches.correct} numbers are correct, ${matches.wrongPlace} not on the right place`;
+  return `${matches.correct} correct, ${matches.wrongPlace} wrong position`;
 }
 
 function createTip(code, attemptCode, checkFunction) {
@@ -140,3 +140,22 @@ function createTip(code, attemptCode, checkFunction) {
   tip.append(codeHeader, tipText);
   tipsSection.append(tip);
 }
+
+/* function generateCode(codeLength) {//create code with not unique numbers
+  let code = randomNumber(0, '9'.repeat(codeLength));
+
+  code = String(code);
+  const len = code.length;
+
+  if (len < codeLength) {
+    code = '0'.repeat(codeLength - len) + code;
+  }
+
+  return code
+} */
+
+/* function testGen(count) {
+  for (let i = 0; i < count; i++) {
+    console.log(generateCode(diff));
+  }
+} */
