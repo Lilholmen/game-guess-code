@@ -16,9 +16,40 @@
   <body>
     <main class="wrapper">
       <section class="settings">
-        <button class="settings__button">
-          <i class="fa-solid fa-gear"></i>
-        </button>
+        <button class="settings__button"></button>
+        <button class="settings__restart"></button>
+
+        <div class="settings__body settings__body--hidden">
+          <div class="settings__game-setting">
+            <div class="game-setting__difficulty">
+              <span class="game-setting__name">Dificulty:</span><br />
+              <span class="'game-setting__marks">2</span>
+              <input
+                class="difficulty__value"
+                id="difficulty"
+                type="range"
+                list="tickmarks"
+                value="3"
+                min="2"
+                max="9"
+                step="1"
+              />
+              <datalist id="tickmarks">
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+                <option value="6"></option>
+                <option value="7"></option>
+                <option value="8"></option>
+                <option value="9"></option>
+              </datalist>
+              <span class="'game-setting__marks">9</span>
+            </div>
+          </div>
+
+          <div class="settings__game-setting"></div>
+        </div>
       </section>
 
       <section class="game">

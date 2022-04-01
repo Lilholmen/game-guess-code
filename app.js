@@ -1,34 +1,23 @@
-const guessButton = document.querySelector('.guess');
 const tipsSection = document.querySelector('.tips');
+const countersContainer = document.querySelector('.code-input');
 
-let diff = 3;
+let difficulty = document.querySelector('#difficulty');
 
-start(diff);
+let code = start(difficulty.value);
 
-function start(difficult) {
-  const codeInputs = createCounters(difficult);
+buttonSetting(countersContainer, tipsSection);
 
-  const code = generateCode(difficult);
+function start(diff) {
+  createCounters(diff);
+
+  const code = generateCode(diff);
 
   console.log(code);
 
-  guessFunction = function () {
-    let guessTry = [];
-
-    codeInputs.forEach((input) => guessTry.push(input.textContent));
-
-    guessTry = guessTry.join('');
-
-    if (guessTry === code) {
-      guessButton.textContent = 'Success';
-    } else {
-      createTip(code, guessTry, checkAttempt);
-    }
-  };
-
-  guessButton.addEventListener('click', guessFunction);
+  return code;
 }
 
+//------------code generation------------
 function randomNumber(min, max) {
   let num = min + Math.floor(Math.random() * (max - min + 1)) + min;
   return num;
@@ -54,9 +43,8 @@ function generateCode(codeLength) {
   return code.join('');
 }
 
+//------------counters section------------
 function createCounters(numberCount) {
-  const container = document.querySelector('.code-input');
-
   for (let i = 1; i <= numberCount; i++) {
     const number = document.createElement('div');
     const incBtn = document.createElement('button');
@@ -91,12 +79,13 @@ function createCounters(numberCount) {
     value.textContent = randomNumber(0, 9);
 
     number.append(incBtn, value, decBtn);
-    container.append(number);
+    countersContainer.append(number);
   }
 
   return document.querySelectorAll('.number__value');
 }
 
+//------------tips section------------
 function checkAttempt(code, attempt) {
   let matches = {
     correct: 0,
@@ -139,6 +128,56 @@ function createTip(code, attemptCode, checkFunction) {
 
   tip.append(codeHeader, tipText);
   tipsSection.append(tip);
+}
+
+//------------buttons setup------------
+function buttonSetting(countersContainer, tipsSection) {
+  //functions
+  const settingsVisabilityFunction = function () {
+    const settingsBody = document.querySelector('.settings__body');
+
+    if (settingsBody.classList.contains('settings__body--hidden')) {
+      settingsBody.classList.remove('settings__body--hidden');
+    } else {
+      settingsBody.classList.add('settings__body--hidden');
+    }
+  };
+
+  const restartFunction = function () {
+    countersContainer.innerHTML = '';
+    tipsSection.innerHTML = '';
+
+    code = start(difficulty.value);
+  };
+
+  const guessFunction = function () {
+    const codeInputs = document.querySelectorAll('.number__value');
+
+    let guessTry = [];
+
+    codeInputs.forEach((input) => guessTry.push(input.textContent));
+
+    guessTry = guessTry.join('');
+
+    if (guessTry === code) {
+      guessButton.textContent = 'Success';
+    } else {
+      createTip(code, guessTry, checkAttempt);
+    }
+  };
+  //add event listeners
+  const settingsVisabilitySwitcher =
+    document.querySelector('.settings__button');
+  settingsVisabilitySwitcher.addEventListener(
+    'click',
+    settingsVisabilityFunction
+  );
+
+  const restartButton = document.querySelector('.settings__restart');
+  restartButton.addEventListener('click', restartFunction);
+
+  const guessButton = document.querySelector('.guess');
+  guessButton.addEventListener('click', guessFunction);
 }
 
 /* function generateCode(codeLength) {//create code with not unique numbers

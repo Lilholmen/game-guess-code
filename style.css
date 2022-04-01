@@ -13,12 +13,36 @@
 
 .settings {
   position: absolute;
-  width: 64px;
-  height: 64px;
-  background-color: #ffcc00;
+  width: 196px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .settings__button {
+  width: 64px;
+  height: 64px;
+  background-color: #ffcc00;
+  background-image: url('img/gear.svg');
+  background-size: 64px;
+}
+
+.settings__restart {
+  width: 64px;
+  height: 64px;
+  background-color: #cc2f2f;
+  background-image: url('img/restart.svg');
+  background-size: 64px;
+}
+
+.settings__body {
+  height: 128px;
+  width: 196px;
+  background-color: #ffcc00;
+  padding: 10px;
+}
+
+.settings__body--hidden {
+  display: none;
 }
 
 .game {
@@ -54,20 +78,22 @@
 }
 
 .number__button--increase {
-  background-image: url('inc.png');
+  background-image: url('img/inc.png');
   background-color: rgba(0, 0, 0, 0);
   background-size: 100%;
 }
 
 .number__button--decrease {
-  background-image: url('dec.png');
+  background-image: url('img/dec.png');
   background-color: rgba(0, 0, 0, 0);
   background-size: 100%;
 }
 
 .number__value {
+  width: 72px;
   font-size: 96px;
-  color: #ffffff;
+  text-align: center;
+  color: #f5f5f5;
 }
 
 .guess {
@@ -89,7 +115,7 @@
 .tip {
   display: flex;
   flex-direction: column;
-  background-image: url('note.png');
+  background-image: url('img/note.png');
   background-size: 180px;
   height: 180px;
   width: 180px;
